@@ -27,13 +27,7 @@ WHERE s.semester = 'Spring' AND s.year = 2010
 ORDER BY s.course_id, s.sec_id;
 
 -- Questão 04. - Lista de pontos totais por curso
-SELECT 
-    s.ID,
-    s.name,
-    c.title,
-    c.dept_name,
-    t.grade,
-    c.credits,
+SELECT s.ID, s.name, c.title, c.dept_name, t.grade, c.credits,
     CASE t.grade
         WHEN 'A+' THEN 4.0 
         WHEN 'A'  THEN 3.7
@@ -61,20 +55,13 @@ SELECT
         WHEN 'D'  THEN 1.0
         WHEN 'F'  THEN 0.0
         ELSE NULL
-    END * c.credits) AS pontos_totais
-FROM student s
+END * c.credits) AS pontos_totais FROM student s
 JOIN takes t ON s.ID = t.ID
 JOIN course c ON t.course_id = c.course_id
 
 -- Questão 05. - Criação da View com base no exercício anterior
 CREATE VIEW coeficiente_rendimento AS 
-SELECT 
-    s.ID,
-    s.name,
-    c.title,
-    c.dept_name,
-    t.grade,
-    c.credits,
+SELECT s.ID, s.name, c.title, c.dept_name, t.grade, c.credits,
     CASE t.grade
         WHEN 'A+' THEN 4.0 
         WHEN 'A'  THEN 3.7
@@ -102,7 +89,6 @@ SELECT
         WHEN 'D'  THEN 1.0
         WHEN 'F'  THEN 0.0
         ELSE NULL
-    END * c.credits) AS pontos_totais
-FROM student s
+END * c.credits) AS pontos_totais FROM student s
 JOIN takes t ON s.ID = t.ID
-JOIN course c ON t.course_id = c.course_id;
+JOIN course c ON t.course_id = c.course_id
